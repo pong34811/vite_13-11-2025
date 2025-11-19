@@ -1,26 +1,35 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
+import { Button, Input, Form } from "antd";
+
 export default function Login() {
   const { login } = useAuth();
   const [username, setUsername] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     login(username, "password");
   };
 
   return (
-    <div>
+    <div style={{ width: 300, margin: "50px auto" }}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+
+      <Form onFinish={handleSubmit}>
+        <Form.Item>
+          <Input
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }
