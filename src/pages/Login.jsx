@@ -5,7 +5,7 @@ import logo from "../assets/images/logo.webp";
 import { Button, Input, Form } from "antd";
 
 export default function Login() {
-  const { login, handleLogin } = useAuth();
+  const {handleLogin } = useAuth();
 
   const [username, setUsername] = useState("");
 
