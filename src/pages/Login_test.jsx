@@ -13,18 +13,18 @@ export default function Login() {
   };
 
   return (
-    <div style={{ width: 300, margin: "200px auto" }}>
+    <div style={{ width: 300, margin: "50px auto" }}>
       <img
         src={logo}
         alt="Logo"
         style={{
           display: "block",
           margin: "0 auto 20px",
-          width: 200,
+          width: 100,
         }}
       />
 
-      <h2>เข้าสู่ระบบ</h2>
+      <h2>Login</h2>
 
       <Form onFinish={handleSubmit}>
         <Form.Item
