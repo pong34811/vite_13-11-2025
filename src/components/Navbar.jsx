@@ -7,6 +7,42 @@ const { Header } = Layout;
 export default function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();
 
+  // 1. สร้าง Array ของ items ตามเงื่อนไข isAuthenticated
+  const menuItems = isAuthenticated
+    ? [
+        {
+          key: "user",
+          label: (
+            <span style={{ color: "#fff", cursor: "default" }}>
+              Hi, {user?.gmail}
+            </span>
+          ),
+          disabled: true, // ทำให้กดไม่ได้ (เพราะเป็นแค่ป้ายชื่อ)
+        },
+        {
+          key: "dashboard",
+          label: <Link to="/dashboard">Dashboard</Link>,
+        },
+        {
+          key: "logout",
+          label: (
+            <Button type="primary" onClick={logout} danger>
+              Logout
+            </Button>
+          ),
+        },
+      ]
+    : [
+        {
+          key: "login",
+          label: (
+            <Link to="/login">
+              <Button type="primary">Login</Button>
+            </Link>
+          ),
+        },
+      ];
+
   return (
     <Header
       style={{
@@ -20,35 +56,19 @@ export default function Navbar() {
         My App
       </div>
 
-      {/* Menu */}
+      {/* Menu แบบใหม่ ใช้ prop 'items' */}
       <Menu
         theme="dark"
         mode="horizontal"
         selectable={false}
-        style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}
-      >
-        {isAuthenticated ? (
-          <>
-            <Menu.Item key="user" disabled>
-              <div style={{ color: "#fff" }}>Hi, {user.name}</div>
-            </Menu.Item>
-            <Menu.Item key="dashboard">
-              <Link to="/dashboard">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item key="logout">
-              <Button type="primary" onClick={logout}>
-                Logout
-              </Button>
-            </Menu.Item>
-          </>
-        ) : (
-          <Menu.Item key="login">
-            <Link to="/login">
-              <Button type="primary">Login</Button>
-            </Link>
-          </Menu.Item>
-        )}
-      </Menu>
+        items={menuItems}
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+          minWidth: 0,
+        }}
+      />
     </Header>
   );
 }

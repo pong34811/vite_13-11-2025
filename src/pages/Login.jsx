@@ -5,36 +5,37 @@ import logo from "../assets/images/logo.webp";
 import { Button, Input, Form } from "antd";
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, handleLogin } = useAuth();
+
   const [username, setUsername] = useState("");
 
-  const handleSubmit = () => {
-    login(username, "password");
+  const handleSubmit = (values) => {
+    handleLogin({ gmail: values.username });
   };
 
   return (
-    <div style={{ width: 300, margin: "200px auto" }}>
+    <div style={{ width: 300, margin: "50px auto" }}>
       <img
         src={logo}
         alt="Logo"
         style={{
           display: "block",
           margin: "0 auto 20px",
-          width: 200,
+          width: 100,
         }}
       />
 
-      <h2>เข้าสู่ระบบ</h2>
+      <h2>Login</h2>
 
       <Form onFinish={handleSubmit}>
         <Form.Item
           rules={[{ required: true, message: "Please input your username!" }]}
           name="username"
+          onChange={(e) => setUsername(e.target.value)}
         >
           <Input
             placeholder="Username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Item>
 
